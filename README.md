@@ -1,2 +1,2 @@
 # taskDealer
-For doing assignment of Operating System class
+For doing assignment of Operating System class.
