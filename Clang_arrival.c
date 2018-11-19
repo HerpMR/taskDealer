@@ -23,7 +23,7 @@ void printstatus(task done,int time){
 int main(int argc, char const *argv[]){
 	int N;
 	int time = 0;
-	int stacktop = 0;
+	int stacktop = -1;
 	bool available = true;	// 0: false, 1: true
 	task TASKLIST[100];
 
@@ -35,14 +35,14 @@ int main(int argc, char const *argv[]){
 	}
 
 	while(1){
-		if(stacktop >= N){
+		if(++stacktop >= 100){
 			printf("Error: stack overflow..\n");
 			return -1;
 		}
 		else{
-			deal(TASKLIST[stacktop++], &time);
+			deal(TASKLIST[stacktop], &time);
+			
 		}
-		
 	}
 	return 0;
 }
