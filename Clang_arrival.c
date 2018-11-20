@@ -11,20 +11,9 @@ typedef struct{
 	bool status;
 } task;
 
-
-int deal(task todo,int pass){
-	if(pass < todo.t_arrival)	pass = todo.t_arrival;
-	pass += todo.t_cost;
-	todo.status = true;
-	//printstatus(todo,pass);
-	return pass;
-}
-
-/*
-void printstatus(task done,int time){
-	printf("Task'%s' is done (fin_time = %d)\n", done->name, time);
-}
-*/
+// prototype & variable
+void deal(task,int *);
+void printstatus(task,int);
 
 int main(int argc, char const *argv[]){
 	int N;
@@ -45,11 +34,21 @@ int main(int argc, char const *argv[]){
 			printf("Error: stack overflow..\n");
 			return -1;
 		}
-		else{
-			time = deal(TASKLIST[stacktop], time);
-		}
+		else deal(TASKLIST[stacktop], &time);
 	}
 	printf("%d\n",time);
 	return 0;
+}
+
+void deal(task todo,int *pass){
+	if(*pass < todo.t_arrival)	*pass = todo.t_arrival;
+	*pass += todo.t_cost;
+	todo.status = true;
+	printstatus(todo,*pass);
+}
+
+void printstatus(task done,int time){
+	printf("Task'%s' is done (arr_time = %3d, fin_time = %3d)\n",
+		done.name, done.t_arrival, time);	
 }
 
