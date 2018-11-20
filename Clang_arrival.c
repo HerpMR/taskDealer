@@ -12,14 +12,12 @@ typedef struct{
 } task;
 
 
-// ここが恐らく原因だからあとで直す
 int deal(task todo,int pass){
 	if(pass < todo.t_arrival)	pass = todo.t_arrival;
-	printf("before: %d\n", pass);
 	pass += todo.t_cost;
-	printf("after : %d\n", pass);
 	todo.status = true;
 	//printstatus(todo,pass);
+	return pass;
 }
 
 /*
@@ -49,10 +47,9 @@ int main(int argc, char const *argv[]){
 		}
 		else{
 			time = deal(TASKLIST[stacktop], time);
-
 		}
-		printf("// dbg: stacktop = %d ,time = %d\n", stacktop,time);
 	}
+	printf("%d\n",time);
 	return 0;
 }
 
