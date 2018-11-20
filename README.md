@@ -1,11 +1,20 @@
 # taskDealer
-For doing assignment of Operating System class.
+For doing my assignment of Operating System class.
+
+
+## 実装等の環境
+* Sublime Text 3 for Windows
+* cmd.exe  
+* MinGW GCC 6.3.0  
+学情の `$ gcc` はバージョンが古くコンパイル時にエラーが発生するので `$ gcc -std=c99 ...` でのコンパイルを強く推奨します。
+
 
 ## 同梱のテストケースについて
 配布されたレジュメ、講義用ページに提出不要課題として掲載されていたものなどを使用しています。
-なおテストケースNo.5は自作のデータです。  
+なおテストケースNo.2とNo.3は自作のデータです。
+`testcases` ディレクトリに入っているテストケースを用いる場合は全体をコピペしてターミナルでペーストしてください。 
 
-テストケースは以下の形式で標準入力から与えられるものに限ります。
+テストケースは以下の形式で標準入力からスペース1つ、改行により与えられるものに限ります。
 
 N：テストケースの数  
 name：タスク名称  
