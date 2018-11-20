@@ -1,5 +1,7 @@
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 // #include "stacklib.h"
 
 typedef struct{
@@ -9,16 +11,22 @@ typedef struct{
 	bool status;
 } task;
 
-int deal(task todo,int *pass){
-	if(pass < todo->t_arrival)	pass = todo->t_arrival;
-	pass += todo->t_cost;
-	todo->status = true;
-	printstatus(todo,pass);
+
+// ここが恐らく原因だからあとで直す
+int deal(task todo,int pass){
+	if(pass < todo.t_arrival)	pass = todo.t_arrival;
+	printf("before: %d\n", pass);
+	pass += todo.t_cost;
+	printf("after : %d\n", pass);
+	todo.status = true;
+	//printstatus(todo,pass);
 }
 
+/*
 void printstatus(task done,int time){
 	printf("Task'%s' is done (fin_time = %d)\n", done->name, time);
 }
+*/
 
 int main(int argc, char const *argv[]){
 	int N;
@@ -30,19 +38,20 @@ int main(int argc, char const *argv[]){
 	scanf("%d",&N);
 	for (int i = 0; i < N; ++i){
 		scanf(" %s %d %d",
-			TASKLIST[i]->name, &TASKLIST[i]->t_arrival, &TASKLIST[i]->t_cost);
-		TASKLIST[i]->status = false;
+			TASKLIST[i].name, &TASKLIST[i].t_arrival, &TASKLIST[i].t_cost);
+		TASKLIST[i].status = false;
 	}
 
-	while(1){
-		if(++stacktop >= 100){
+	while(++stacktop < N){
+		if(stacktop >= 100){
 			printf("Error: stack overflow..\n");
 			return -1;
 		}
 		else{
-			deal(TASKLIST[stacktop], &time);
-			
+			time = deal(TASKLIST[stacktop], time);
+
 		}
+		printf("// dbg: stacktop = %d ,time = %d\n", stacktop,time);
 	}
 	return 0;
 }
