@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 // #include "stacklib.h"
+// #include "queuelib.h"
 
 typedef struct{
 	char name[10];
@@ -18,7 +19,7 @@ void printstatus(task,int);
 int main(int argc, char const *argv[]){
 	int N;
 	int time = 0;
-	int stacktop = -1;
+	int queuetop = -1;
 	bool available = true;	// 0: false, 1: true
 	task TASKLIST[100];
 
@@ -29,12 +30,12 @@ int main(int argc, char const *argv[]){
 		TASKLIST[i].status = false;
 	}
 
-	while(++stacktop < N){
-		if(stacktop >= 100){
-			printf("Error: stack overflow..\n");
+	while(++queuetop < N){
+		if(queuetop >= 100){
+			printf("Error: queue overflow..\n");
 			return -1;
 		}
-		else deal(TASKLIST[stacktop], &time);
+		else deal(TASKLIST[queuetop], &time);
 	}
 	printf("%d\n",time);
 	return 0;
