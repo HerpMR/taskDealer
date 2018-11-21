@@ -1,4 +1,4 @@
-# taskDealer
+# taskScheduler
 For doing my assignment of Operating System class.
 
 
