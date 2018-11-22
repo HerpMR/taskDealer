@@ -31,7 +31,7 @@ For doing my assignment of Operating System class.
 
 テストケースは以下の形式で標準入力からスペース1つ、改行により与えられるものに限ります。  
 
-name：タスク名称
+name：タスク名称  
 N：テストケースの数  
 t_arrival：タスクの到着時間  
 t_cost：そのタスクを処理するのに必要な時間  
