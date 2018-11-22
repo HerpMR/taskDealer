@@ -23,6 +23,7 @@ int main(int argc, char const *argv[]){
 	bool available = true;	// 0: false, 1: true
 	task TASKLIST[100];
 
+	printf("## Scheduler of the order of arrival method\ninput:\n");
 	scanf("%d",&N);
 	for (int i = 0; i < N; ++i){
 		scanf(" %s %d %d",
@@ -30,6 +31,7 @@ int main(int argc, char const *argv[]){
 		TASKLIST[i].status = false;
 	}
 
+	printf("\nOutput:\n");
 	while(++queuetop < N){
 		if(queuetop >= 100){
 			printf("Error: queue overflow..\n");
