@@ -14,7 +14,7 @@ For doing my assignment of Operating System class.
 `○○○` が  
 * `Clang` ：C言語（MinGW GCC-6.3.0）  
 * `Python` ：Python（Python 3.5.2, Anaconda 4.2.0 (64-bit)）  
-* `Ruby` ： ~最新版Ruby（Rubyわからん、というよりは環境構築が面倒）~  
+* `Ruby` ： ~最新版Ruby（Rubyわからん、というよりは環境構築する気が起きない）~  
   
 `×××` が  
 * `arrival` ：到着順  
@@ -29,9 +29,9 @@ For doing my assignment of Operating System class.
 なおテストケースNo.2とNo.3は自作のデータです。
 `testcases` ディレクトリに入っているテストケースを用いる場合は全体をコピーしてターミナルでペーストしてください。 
 
-テストケースは以下の形式で標準入力
-name：タスク名称  からスペース1つ、改行により与えられるものに限ります。
+テストケースは以下の形式で標準入力からスペース1つ、改行により与えられるものに限ります。  
 
+name：タスク名称
 N：テストケースの数  
 t_arrival：タスクの到着時間  
 t_cost：そのタスクを処理するのに必要な時間  
