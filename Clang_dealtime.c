@@ -15,7 +15,7 @@ typedef struct{
 // prototype & variable
 void deal(task,int *);
 void printstatus(task,int);
-void i_sort(task *,int);	// insertion sort
+void sort(task *,int,int,int);
 
 int main(int argc, char const *argv[]){
 	int N;
@@ -33,31 +33,28 @@ int main(int argc, char const *argv[]){
 	}
 
 	printf("\nOutput:\n");
-	i_sort(TASKLIST,N);
 	while(++queuetop < N){
 		if(queuetop >= 100){
 			printf("Error: queue overflow..\n");
 			return -1;
 		}
-		else deal(TASKLIST[queuetop], &time);
+		else{
+			sort(TASKLIST,queuetop,N,time);
+			deal(TASKLIST[queuetop], &time);
+		}
 	}
 	printf("%d\n",time);
 	return 0;
 }
 
-// Do insertion sort in queue
-void i_sort(task *TASKLIST,int num){
-	int j;
-	task data;
 
-	for (int i = 1; i < num; ++i){
-		data = TASKLIST[i];
-		j = i;
-		while((j > 0) && (TASKLIST[j - 1].t_cost > data.t_cost)){
-			TASKLIST[j] = TASKLIST[j - 1];
-			--j;
+void sort(task *TASKLIST,int top,int num, int time){
+	for (int i = top; i < num; ++i){
+		if (TASKLIST[i].t_arrival <= time && TASKLIST[top].t_cost > TASKLIST[i].t_cost){
+			task tmp = TASKLIST[top];
+			TASKLIST[top] = TASKLIST[i];
+			TASKLIST[i] = tmp;
 		}
-		TASKLIST[j] = data;
 	}
 }
 
@@ -70,6 +67,6 @@ void deal(task todo,int *pass){
 
 void printstatus(task done,int time){
 	printf("Task'%s' is done (arr_time = %3d, fin_time = %3d)\n",
-		done.name, done.t_arrival, time);	
+		done.name, done.t_arrival, time);
 }
 
