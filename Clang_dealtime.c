@@ -47,8 +47,7 @@ int main(int argc, char const *argv[]){
 	return 0;
 }
 
-
-void sort(task *TASKLIST,int top,int num, int time){
+void sort(task *TASKLIST,int top,int num,int time){
 	for (int i = top; i < num; ++i){
 		if (TASKLIST[i].t_arrival <= time && TASKLIST[top].t_cost > TASKLIST[i].t_cost){
 			task tmp = TASKLIST[top];
