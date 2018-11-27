@@ -6,10 +6,6 @@
 // #include "stacklib.h"
 // #include "queuelib.h"
 
-// prototype & variable
-void deal(task,int *);
-void printstatus(task,int);
-
 int main(int argc, char const *argv[]){
 	int N;
 	int time = 0;
