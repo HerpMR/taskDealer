@@ -29,7 +29,7 @@ int main(int argc, char const *argv[]){
 	for (int i = 0; i < N; ++i){
 		scanf(" %s %d %d",
 			TASKLIST[i].name, &TASKLIST[i].t_arrival, &TASKLIST[i].t_cost);
-		TASKLIST[i].status = true;
+		TASKLIST[i].status = 1;	// all tasks is executable
 	}
 
 	printf("\nOutput:\n");
@@ -42,22 +42,5 @@ int main(int argc, char const *argv[]){
 	}
 	printf("%d\n",time);
 	return 0;
-}
-
-void deal(task todo,int *pass){
-	if(*pass < todo.t_arrival)	*pass = todo.t_arrival;
-	*pass += todo.t_cost;
-	todo.status = true;
-	printstatus(todo,*pass);
-}
-
-void printstatus(task done,int time){
-	printf("Task'%s' is done (arr_time = %3d, fin_time = %3d)\n",
-		done.name, done.t_arrival, time);	
-}
-
-// Round-Robin system.
-void robinstream(task *TASKLIST,int num,int *time){
-	return;
 }
 
