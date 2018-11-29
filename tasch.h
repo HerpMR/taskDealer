@@ -3,15 +3,23 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
 // Use this struct for scheduling algorithm
 typedef struct{
 	char name[10];
 	int t_arrival;
 	int t_cost;
-	bool status;
+	int status;
 } task;
+
+/*
+	*task.status value is :
+	0: done,
+	1: executable,
+	2: dealing,
+	3: waiting
+*/
+
 
 // print task what has done
 void printstatus(task done,int time){
@@ -38,4 +46,10 @@ void sort(task *TASKLIST,int top,int num,int time){
 	}
 }
 
+// Round-Robin system.
+void robinstream(task *TASKLIST,int num,int *time){
+	return;
+}
+
 #endif
+
