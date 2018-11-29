@@ -9,7 +9,7 @@ typedef struct{
 	char name[10];
 	int t_arrival;
 	int t_cost;
-	int status;
+	bool status;
 } task;
 
 /*

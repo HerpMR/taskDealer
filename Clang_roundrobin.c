@@ -5,18 +5,6 @@
 // #include "stacklib.h"
 // #include "queuelib.h"
 
-typedef struct{
-	char name[10];
-	int t_arrival;
-	int t_cost;
-	bool status;
-} task;
-
-// prototype & variable
-void deal(task,int *);	// 多分今回使わない
-void printstatus(task,int);
-void robinstream(task *,int,int *);	//代わりにこっち
-
 int main(int argc, char const *argv[]){
 	int N;
 	int time = 0;
