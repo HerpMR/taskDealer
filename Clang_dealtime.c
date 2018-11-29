@@ -18,7 +18,7 @@ int main(int argc, char const *argv[]){
 	for (int i = 0; i < N; ++i){
 		scanf(" %s %d %d",
 			TASKLIST[i].name, &TASKLIST[i].t_arrival, &TASKLIST[i].t_cost);
-		TASKLIST[i].status = false;
+		TASKLIST[i].status = 1;
 	}
 
 	printf("\nOutput:\n");
