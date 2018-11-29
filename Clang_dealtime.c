@@ -6,6 +6,8 @@
 // #include "stacklib.h"
 // #include "queuelib.h"
 
+void sort(task *,int,int,int);
+
 int main(int argc, char const *argv[]){
 	int N;
 	int time = 0;
@@ -24,7 +26,7 @@ int main(int argc, char const *argv[]){
 	printf("\nOutput:\n");
 	while(++queuetop < N){
 		if(queuetop >= 100){
-			printf("Error: queue overflow..\n");
+			printf("Error: queue size shortage..\n");
 			return -1;
 		}
 		else{
@@ -34,5 +36,18 @@ int main(int argc, char const *argv[]){
 	}
 	printf("%d\n",time);
 	return 0;
+}
+
+// Select and Move to queue top (by ma1750)
+void sort(task *TASKLIST,int top,int num,int time){
+
+	// ここの処理回数減らしたい
+	for (int i = top; i < num; ++i){
+		if (TASKLIST[i].t_arrival <= time && TASKLIST[top].t_cost > TASKLIST[i].t_cost){
+			task tmp = TASKLIST[top];
+			TASKLIST[top] = TASKLIST[i];
+			TASKLIST[i] = tmp;
+		}
+	}
 }
 

@@ -24,7 +24,7 @@ int main(int argc, char const *argv[]){
 	printf("\nOutput:\n");
 	while(++queuetop < N){
 		if(queuetop >= 100){
-			printf("Error: queue overflow..\n");
+			printf("Error: queue size shortage..\n");
 			return -1;
 		}
 		else deal(TASKLIST[queuetop], &time);
