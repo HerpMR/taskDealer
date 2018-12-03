@@ -9,7 +9,7 @@ typedef struct{
 	char name[10];
 	int t_arrival;
 	int t_cost;
-	bool status;
+	int status;
 } task;
 
 /*
@@ -20,36 +20,52 @@ typedef struct{
 	3: waiting
 */
 
+/*
+// static variable
+static int queuehead;
+static int queuetail;
 
-// print task what has done
-void printstatus(task done,int time){
-	printf("Task'%s' is done (arr_time = %3d, fin_time = %3d)\n",
-		done.name, done.t_arrival, time);	
+// Do enqueue
+void Enqueue(task data,task *TASKLIST){
+	queuetail = (++queuetail) % 100;
+	TASKLIST[queuetail] = data;
+	if(queuehead == queuetail){
+		printf("Error: Overflow..\n");
+		return;
+	}
+}
+
+// Do dequeue
+task Dequeue(task *TASKLIST){
+	if(queuehead == queuetail){
+		printf("Error: Underflow..\n");
+		return;
+	}
+	else{
+		queuehead = (++queuehead) % 100;
+		return TASKLIST[queuehead];
+	}
+}
+*/
+
+// Print task what has done
+void printstatus(task done,int time,int lim){
+	if(!done.status){
+		printf("Task'%s' is done (arr_time = %3d, fin_time = %3d)\n",
+			done.name, done.t_arrival, time);
+	}
+	else{
+		printf("Task'%s' is paused (start(restart)_time = %3d, pause_time = %3d)\n",
+			done.name, time - lim, time);
+	}
 }
 
 // Use for arrival.c & dealtime.c
 void deal(task todo,int *pass){
 	if(*pass < todo.t_arrival)	*pass = todo.t_arrival;
 	*pass += todo.t_cost;
-	todo.status = true;
-	printstatus(todo,*pass);
-}
-
-// Select and Move to queue top (by ma1750)
-void sort(task *TASKLIST,int top,int num,int time){
-	for (int i = top; i < num; ++i){
-		if (TASKLIST[i].t_arrival <= time && TASKLIST[top].t_cost > TASKLIST[i].t_cost){
-			task tmp = TASKLIST[top];
-			TASKLIST[top] = TASKLIST[i];
-			TASKLIST[i] = tmp;
-		}
-	}
-}
-
-// Round-Robin system.
-void robinstream(task *TASKLIST,int num,int *time){
-	
-	return;
+	todo.status = 0;
+	printstatus(todo,*pass,0);
 }
 
 #endif
