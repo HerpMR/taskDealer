@@ -10,14 +10,13 @@ void robinstream(task *,int,int,int *);
 
 int main(int argc, char const *argv[]){
 	int N;
-	int lim = 2;
-	int time = 0;
+	int lim,time = 0;
 	int queuetop = -1;
 	bool available = true;	// 0: false, 1: true
 	task TASKLIST[100];
 
 	printf("## Scheduler of Round-Robin method\ninput:\n");
-	scanf("%d",&N);
+	scanf("%d %d", &N, &lim);
 	for (int i = 0; i < N; ++i){
 		scanf(" %s %d %d",
 			TASKLIST[i].name, &TASKLIST[i].t_arrival, &TASKLIST[i].t_cost);
