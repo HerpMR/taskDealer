@@ -6,7 +6,7 @@
 // #include "stacklib.h"
 // #include "queuelib.h"
 
-void sort(task *,int,int,int);
+void selectTop(task *,int,int,int);
 
 int main(int argc, char const *argv[]){
 	int N;
@@ -30,7 +30,7 @@ int main(int argc, char const *argv[]){
 			return -1;
 		}
 		else{
-			sort(TASKLIST,queuetop,N,time);
+			selectTop(TASKLIST,queuetop,N,time);
 			deal(TASKLIST[queuetop], &time);
 		}
 	}
@@ -39,9 +39,9 @@ int main(int argc, char const *argv[]){
 }
 
 // Select and Move to queue top (by ma1750)
-void sort(task *TASKLIST,int top,int num,int time){
+void selectTop(task *TASKLIST,int top,int num,int time){
+	int i_min;
 
-	// ここの処理回数減らしたい
 	for (int i = top; i < num; ++i){
 		if (TASKLIST[i].t_arrival <= time && TASKLIST[top].t_cost > TASKLIST[i].t_cost){
 			task tmp = TASKLIST[top];
