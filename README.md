@@ -44,7 +44,7 @@ TASK[1].name  TASK[1].t_arrival  TASK[1].t_cost
 TASK[2].name  TASK[2].t_arrival  TASK[2].t_cost  
 TASK[3].name  TASK[3].t_arrival  TASK[3].t_cost  
 			：  
-TASK[N - 1].name  TASK[N - 1].t_arrival  TASK[N - 1].t_cost  
+TASK[N].name  TASK[N].t_arrival  TASK[N].t_cost  
 lim // ←ラウンドロビン方式のみ入力  
 ```
   
