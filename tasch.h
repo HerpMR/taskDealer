@@ -16,8 +16,7 @@ typedef struct{
 	*task.status value is :
 	0: done,
 	1: executable,
-	2: dealing,
-	3: waiting
+	2: waiting
 */
 
 /*
@@ -55,14 +54,25 @@ void printstatus(task done,int time,int lim){
 			done.name, done.t_arrival, time);
 	}
 	else{
-		printf("Task'%s' is paused (start(restart)_time = %3d, pause_time = %3d)\n",
-			done.name, time - lim, time);
+		if(done.status == 1){
+			printf("Task'%s' is paused (  start_time = %3d, pause_time = %3d)\n",
+				done.name, time - lim, time);
+		}
+		else if(done.status == 2){
+			printf("Task'%s' is paused (restart_time = %3d, pause_time = %3d)\n",
+				done.name, time - lim, time);
+		}
 	}
+}
+
+// Gap filling when not arriving
+void timeadjust(task todo,int *pass){
+	if(*pass < todo.t_arrival)	*pass = todo.t_arrival;
 }
 
 // Use for arrival.c & dealtime.c
 void deal(task todo,int *pass){
-	if(*pass < todo.t_arrival)	*pass = todo.t_arrival;
+	timeadjust(todo, &*pass);
 	*pass += todo.t_cost;
 	todo.status = 0;
 	printstatus(todo,*pass,0);
