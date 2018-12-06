@@ -16,12 +16,13 @@ int main(int argc, char const *argv[]){
 	task TASKLIST[100];
 
 	printf("## Scheduler of Round-Robin method\ninput:\n");
-	scanf("%d %d", &N, &lim);
+	scanf("%d", &N);
 	for (int i = 0; i < N; ++i){
 		scanf(" %s %d %d",
 			TASKLIST[i].name, &TASKLIST[i].t_arrival, &TASKLIST[i].t_cost);
 		TASKLIST[i].status = 1;	// all tasks is executable
 	}
+	scanf(" %d", &lim);
 
 	printf("\nOutput:\n");
 	while(++queuetop < N){
@@ -48,12 +49,14 @@ void robinstream(task *TASKLIST,int size,int limit,int *time){
 					*time += TASKLIST[i].t_cost;
 					TASKLIST[i].t_cost = 0;
 					TASKLIST[i].status = 0;
+					printstatus(TASKLIST[i],*time,limit);
 				}
 				else{
 					TASKLIST[i].t_cost -= limit;
 					*time += limit;
+					printstatus(TASKLIST[i],*time,limit);
+					TASKLIST[i].status = 2;
 				}
-				printstatus(TASKLIST[i],*time,limit);
 			}
 		}
 		for (int i = 0; i < size; ++i)	cont += TASKLIST[i].status;
