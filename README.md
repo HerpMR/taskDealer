@@ -4,7 +4,7 @@ For doing my assignment of Operating System class.
 
 ## 実装等の環境
 * Sublime Text 3 for Windows
-* cmd.exe  
+* cmd.exe（Windows Powershell 5.1.17134.407, Desktop）  
 * MinGW GCC-6.3.0  
 学情の `$ gcc` はバージョンが古くコンパイル時にエラーが発生するので `$ gcc -std=c99 ...` でのコンパイルを強く推奨します。
   
