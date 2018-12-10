@@ -6,6 +6,7 @@
 // #include "stacklib.h"
 // #include "queuelib.h"
 
+double qtime = 0.00;
 void robinstream(task *,int,int,int *);
 
 int main(int argc, char const *argv[]){
@@ -32,7 +33,7 @@ int main(int argc, char const *argv[]){
 		}
 		else robinstream(TASKLIST,N,lim, &time);
 	}
-	printf("%d\n",time);
+	printf("%d %.2f\n",time,qtime);
 	return 0;
 }
 
@@ -49,13 +50,14 @@ void robinstream(task *TASKLIST,int size,int limit,int *time){
 					*time += TASKLIST[i].t_cost;
 					TASKLIST[i].t_cost = 0;
 					TASKLIST[i].status = 0;
+					qtime += (double)(*time - TASKLIST[i].t_arrival) / (double)size;
 					printstatus(TASKLIST[i],*time,limit);
 				}
 				else{
 					TASKLIST[i].t_cost -= limit;
 					*time += limit;
 					printstatus(TASKLIST[i],*time,limit);
-					TASKLIST[i].status = 2;
+					TASKLIST[i].status = 3;
 				}
 			}
 		}
