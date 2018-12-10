@@ -41,8 +41,8 @@ int main(int argc, char const *argv[]){
 
 // Select and Move to queue top (by ma1750)
 void selectTop(task *TASKLIST,int top,int num,int time){
-	for (int i = top; i < num; ++i){
-		if (TASKLIST[i].t_arrival <= time && TASKLIST[top].t_cost > TASKLIST[i].t_cost){
+	for (int i = top + 1; i < num; ++i){
+		if ((TASKLIST[i].t_arrival <= time) && (TASKLIST[top].t_cost > TASKLIST[i].t_cost)){
 			task tmp = TASKLIST[top];
 			TASKLIST[top] = TASKLIST[i];
 			TASKLIST[i] = tmp;
