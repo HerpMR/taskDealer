@@ -16,7 +16,8 @@ typedef struct{
 	*task.status value is :
 	0: done,
 	1: executable,
-	2: waiting
+	2: executing
+	3: waiting
 */
 
 /*
@@ -58,7 +59,7 @@ void printstatus(task done,int time,int lim){
 			printf("Task'%s' is paused (  start_time = %3d, pause_time = %3d)\n",
 				done.name, time - lim, time);
 		}
-		else if(done.status == 2){
+		else if(done.status == 3){
 			printf("Task'%s' is paused (restart_time = %3d, pause_time = %3d)\n",
 				done.name, time - lim, time);
 		}
@@ -71,9 +72,10 @@ void timeadjust(task todo,int *pass){
 }
 
 // Use for arrival.c & dealtime.c
-void deal(task todo,int *pass){
+void deal(task todo,int *pass,int size,double *qtime){
 	timeadjust(todo, &*pass);
 	*pass += todo.t_cost;
+	*qtime += (double)(*pass - todo.t_arrival) / (double)size;
 	todo.status = 0;
 	printstatus(todo,*pass,0);
 }
