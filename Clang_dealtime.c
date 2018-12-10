@@ -12,6 +12,7 @@ int main(int argc, char const *argv[]){
 	int N;
 	int time = 0;
 	int queuetop = -1;
+	double qtime = 0.00;
 	bool available = true;	// 0: false, 1: true
 	task TASKLIST[100];
 
@@ -31,10 +32,10 @@ int main(int argc, char const *argv[]){
 		}
 		else{
 			selectTop(TASKLIST,queuetop,N,time);
-			deal(TASKLIST[queuetop], &time);
+			deal(TASKLIST[queuetop], &time,N, &qtime);
 		}
 	}
-	printf("%d\n",time);
+	printf("%d %.2f\n",time,qtime);
 	return 0;
 }
 
