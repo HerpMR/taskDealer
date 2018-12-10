@@ -1,21 +1,5 @@
-20
-cd 2 1
-ls 3 8
-sudo 10 4
-mkdir 18 3
-rm 21 4
-ssh 25 5
-gcc 32 3
-git 40 12
-rsync 45 3
-echo 48 2
-top 52 5
-rasdial 61 5
-python 63 3
-scp 66 4
-df 70 2
-bash 72 2
-more 73 2
-emacs 80 3
-kill 90 1
-exit 95 3
+4
+X 0 2
+Y 1 10
+Z 3 7
+W 5 3
