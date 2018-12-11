@@ -3,7 +3,7 @@
 cd /d %~dp0
 
 rem TestCaseGenerator for Windows
-rem from herpMR
+rem from HerpMR
 
 for /l %%i in (1,1,4) do (
 	if not exist case_no%%i.txt (
@@ -12,3 +12,4 @@ for /l %%i in (1,1,4) do (
 	)
 )
 echo Generation Completed..
+

@@ -21,3 +21,4 @@ int main(int argc, char const *argv[]){
 	fclose(WTO);
 	return 0;
 }
+
