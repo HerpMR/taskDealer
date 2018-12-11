@@ -26,13 +26,7 @@ int main(int argc, char const *argv[]){
 	scanf(" %d", &lim);
 
 	printf("\nOutput:\n");
-	while(++queuetop < N){
-		if(queuetop >= 100){
-			printf("Error: queue size shortage..\n");
-			return -1;
-		}
-		else robinstream(TASKLIST,N,lim, &time);
-	}
+	robinstream(TASKLIST,N,lim, &time);
 	printf("%d %.2f\n",time,qtime);
 	return 0;
 }
