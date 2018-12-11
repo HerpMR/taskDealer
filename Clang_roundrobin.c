@@ -42,23 +42,28 @@ void robinstream(task *TASKLIST,int size,int limit,int *time){
 	int cont = 1;
 	while(cont){
 		cont = 0;
+
 		for (int i = 0; i < size; ++i){
 
 			// trace and check
-			if(TASKLIST[i].status && TASKLIST[i].t_arrival <= *time){
-				if(TASKLIST[i].t_cost <= limit){
-					*time += TASKLIST[i].t_cost;
-					TASKLIST[i].t_cost = 0;
-					TASKLIST[i].status = 0;
-					qtime += (double)(*time - TASKLIST[i].t_arrival) / (double)size;
-					printstatus(TASKLIST[i],*time,limit);
+			if(TASKLIST[i].status){
+
+				if(TASKLIST[i].t_arrival <= *time){
+					if(TASKLIST[i].t_cost <= limit){
+						*time += TASKLIST[i].t_cost;
+						TASKLIST[i].t_cost = 0;
+						TASKLIST[i].status = 0;
+						qtime += (double)(*time - TASKLIST[i].t_arrival) / (double)size;
+						printstatus(TASKLIST[i],*time,limit);
+					}
+					else{
+						TASKLIST[i].t_cost -= limit;
+						*time += limit;
+						printstatus(TASKLIST[i],*time,limit);
+						TASKLIST[i].status = 3;
+					}
 				}
-				else{
-					TASKLIST[i].t_cost -= limit;
-					*time += limit;
-					printstatus(TASKLIST[i],*time,limit);
-					TASKLIST[i].status = 3;
-				}
+				else timeadjust(TASKLIST[i - 1], &(*time));
 			}
 		}
 		for (int i = 0; i < size; ++i)	cont += TASKLIST[i].status;
