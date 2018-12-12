@@ -27,21 +27,21 @@ static task* queue[300];
 
 // Do enqueue
 void enqueue(task *x){
-    queuetail = (queuetail + 1) % 300;
-    queue[queuetail] = x;
-    if(queuehead == queuetail){
-        printf("Error: Overflow..\n");
-        return;
-    }
+	queuetail = (queuetail + 1) % 300;
+	queue[queuetail] = x;
+	if(queuehead == queuetail){
+		printf("Error: Overflow..\n");
+		return;
+	}
 }
 
 // Do dequeue
 task* dequeue(){
-    if(queuehead == queuetail)  return NULL;
-    else{
-        queuehead = (queuehead + 1) % 300;
-        return queue[queuehead];
-    }
+	if(queuehead == queuetail)  return NULL;
+	else{
+		queuehead = (queuehead + 1) % 300;
+		return queue[queuehead];
+	}
 }
 
 // Print task what has done
