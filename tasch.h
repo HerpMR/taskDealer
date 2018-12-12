@@ -20,33 +20,29 @@ typedef struct{
 	3: waiting
 */
 
-/*
 // static variable
 static int queuehead;
 static int queuetail;
+static task* queue[300];
 
 // Do enqueue
-void Enqueue(task data,task *TASKLIST){
-	queuetail = (++queuetail) % 100;
-	TASKLIST[queuetail] = data;
-	if(queuehead == queuetail){
-		printf("Error: Overflow..\n");
-		return;
-	}
+void enqueue(task *x){
+    queuetail = (queuetail + 1) % 300;
+    queue[queuetail] = x;
+    if(queuehead == queuetail){
+        printf("Error: Overflow..\n");
+        return;
+    }
 }
 
 // Do dequeue
-task Dequeue(task *TASKLIST){
-	if(queuehead == queuetail){
-		printf("Error: Underflow..\n");
-		return;
-	}
-	else{
-		queuehead = (++queuehead) % 100;
-		return TASKLIST[queuehead];
-	}
+task* dequeue(){
+    if(queuehead == queuetail)  return NULL;
+    else{
+        queuehead = (queuehead + 1) % 300;
+        return queue[queuehead];
+    }
 }
-*/
 
 // Print task what has done
 void printstatus(task done,int time,int lim){
