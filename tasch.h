@@ -21,12 +21,11 @@ typedef struct{
 */
 
 // static variable
-static int queuehead;
-static int queuetail;
-static task* queue[300];
+static int queuehead,queuetail;
+static task queue[300];
 
 // Do enqueue
-void enqueue(task *x){
+void enqueue(task x){
 	queuetail = (queuetail + 1) % 300;
 	queue[queuetail] = x;
 	if(queuehead == queuetail){
@@ -36,15 +35,14 @@ void enqueue(task *x){
 }
 
 // Do dequeue
-task* dequeue(){
-	if(queuehead == queuetail)  return NULL;
-	else{
+task dequeue(){
+	if(queuehead != queuetail){
 		queuehead = (queuehead + 1) % 300;
 		return queue[queuehead];
 	}
 }
 
-// Print task what has done
+// Print task what has done or paused
 void printstatus(task done,int time,int lim){
 	if(!done.status){
 		printf("Task'%s' is done (arr_time = %3d, fin_time = %3d)\n",
