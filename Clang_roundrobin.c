@@ -6,15 +6,15 @@
 // #include "stacklib.h"
 // #include "queuelib.h"
 
-double qtime = 0.00;
+int sum = 0;
 void robinstream(task *,int,int,int *);
 
 int main(int argc, char const *argv[]){
 	int N;
 	int lim,time = 0;
-	int queuetop = -1;
 	bool available = true;	// 0: false, 1: true
-	task TASKLIST[300];
+	task TASKLIST[100];
+	queuehead = queuetail = 0;
 
 	// Input
 	printf("## Scheduler of Round-Robin method\ninput:\n");
@@ -25,46 +25,54 @@ int main(int argc, char const *argv[]){
 		TASKLIST[i].status = 1;	// all tasks is executable
 	}
 	scanf(" %d", &lim);
-	// enqueue(&TASKLIST[0]);
+	enqueue(TASKLIST[0]);
 	TASKLIST[0].status = 1;
 
 	// Output
 	printf("\nOutput:\n");
 	robinstream(TASKLIST,N,lim, &time);
-	printf("%d %.2f\n",time,qtime);
+	printf("%d %.2f\n",time, (double)sum / N);
 	return 0;
 }
 
 // Round-Robin system.
 void robinstream(task *TASKLIST,int size,int limit,int *time){
-	int i = 0;
-	int cont = 1;
-	while(cont){
+	int cont;
+	task todo;
+
+	do{
+		todo = dequeue();
 		cont = 0;
+		timeadjust(todo, &(*time));
 
 		// trace and check
-		if(TASKLIST[i % size].status){
-
-			if(TASKLIST[i % size].t_arrival <= *time){
-				if(TASKLIST[i % size].t_cost <= limit){
-					*time += TASKLIST[i % size].t_cost;
-					TASKLIST[i % size].t_cost = 0;
-					TASKLIST[i % size].status = 0;
-					qtime += (double)(*time - TASKLIST[i % size].t_arrival) / (double)size;
-					printstatus(TASKLIST[i % size],*time,limit);
-				}
-				else{
-					TASKLIST[i % size].t_cost -= limit;
-					*time += limit;
-					printstatus(TASKLIST[i % size],*time,limit);
-					TASKLIST[i % size].status = 3;
-				}
+		// todo.t_arrival <= *time
+		if(todo.status){
+			if(todo.t_cost <= limit){
+				*time += todo.t_cost;
+				todo.t_cost = 0;
+				todo.status = 0;
+				sum += *time - todo.t_arrival;
+				printstatus(todo,*time,limit);
 			}
-			else timeadjust(TASKLIST[(i - 1) % size], &(*time));
+			else{
+				todo.t_cost -= limit;
+				*time += limit;
+				printstatus(todo,*time,limit);
+				todo.status = 3;
+				enqueue(todo);
+			}
 		}
-		++i;
-		for (int j = 0; j < size; ++j)	cont += TASKLIST[j].status;
-	}
+
+		// memo: where will be put (12/13)
+		for(int i = 0; i < size; ++i){
+			if(TASKLIST[i].t_arrival <= *time && TASKLIST[i].status == 1){
+				enqueue(TASKLIST[i]);
+				TASKLIST[i].status = 3;
+			}
+		}
+		for (int i = 0; i < size; ++i)	cont += TASKLIST[i].status;
+	} while(cont);
 	return;
 }
 
