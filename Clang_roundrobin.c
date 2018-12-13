@@ -1,6 +1,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>	// Use strcmp(...)
 #include <stdbool.h>
 #include "tasch.h"	// Original header files
 // #include "stacklib.h"
@@ -47,7 +48,7 @@ void robinstream(task *TASKLIST,int size,int limit,int *time){
 
 		// trace and check
 		// todo.t_arrival <= *time
-		if(todo.status){
+		if(todo.status && todo.t_cost){
 			if(todo.t_cost <= limit){
 				*time += todo.t_cost;
 				todo.t_cost = 0;
@@ -62,15 +63,27 @@ void robinstream(task *TASKLIST,int size,int limit,int *time){
 				todo.status = 3;
 				enqueue(todo);
 			}
+			for (int k = 0; k < size; ++k){
+				if(!strcmp(TASKLIST[k].name,todo.name)){
+					TASKLIST[k] = todo;
+					printf("// dbg: task* data Copied. (TASKLIST[%d] <- todo)\n", k);
+					printf("// dbg: TASKLIST[%d].t_cost = %d, todo.t_cost = %d\n",
+						k,TASKLIST[k].t_cost, todo.t_cost);
+					printf("// dbg: TASKLIST[%d].status = %d, todo.status = %d\n\n",
+						k,TASKLIST[k].status,todo.status);
+					break;
+				}
+			}
 		}
 
 		// memo: where will be put (12/13)
 		for(int i = 0; i < size; ++i){
 			if(TASKLIST[i].t_arrival <= *time && TASKLIST[i].status == 1){
 				enqueue(TASKLIST[i]);
-				TASKLIST[i].status = 3;
+				// TASKLIST[i].status = 3;
 			}
 		}
+		
 		for (int i = 0; i < size; ++i)	cont += TASKLIST[i].status;
 	} while(cont);
 	return;
