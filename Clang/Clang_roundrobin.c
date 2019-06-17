@@ -43,9 +43,13 @@ void robinstream(task *TASKLIST,int size,int limit,int *time){
 		cont = 0;
 
 		// trace and check
+		// is Valid?
 		if(TASKLIST[i % size].status){
 
+			// is Arrived?
 			if(TASKLIST[i % size].t_arrival <= *time){
+
+				// can finish in limit
 				if(TASKLIST[i % size].t_cost <= limit){
 					*time += TASKLIST[i % size].t_cost;
 					TASKLIST[i % size].t_cost = 0;
@@ -53,14 +57,17 @@ void robinstream(task *TASKLIST,int size,int limit,int *time){
 					qtime += (double)(*time - TASKLIST[i % size].t_arrival) / (double)size;
 					printstatus(TASKLIST[i % size],*time,limit);
 				}
-				else{
+
+				else{ // can NOT finish in limit
 					TASKLIST[i % size].t_cost -= limit;
 					*time += limit;
 					printstatus(TASKLIST[i % size],*time,limit);
 					TASKLIST[i % size].status = 3;
 				}
 			}
-			else timeadjust(TASKLIST[(i - 1) % size], &(*time));
+			
+			// NOT arrive
+			else timeadjust(TASKLIST[(i - 1) % size], &(*time));	
 		}
 		++i;
 		for (int j = 0; j < size; ++j)	cont += TASKLIST[j].status;
